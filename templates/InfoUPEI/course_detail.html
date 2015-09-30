@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title_block %}Course Detail{% endblock %}
+{% block body_block %}
+    <link rel="stylesheet" type="text/css" href="/static/css/course_detail.css">
+    <h1>{{ course.name }}</h1>
+
+    <div class="row">
+            <label>Instructor:</label><a href="{% url 'user_detail' course.instructor.username%}" >{{ course.instructor.userprofile.get_full_name }}</a>
+    </div>
+
+    {% if course.course_description_text %}
+        <div class="row">
+            <label>Course Description:</label>{{ course.course_description_text }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}

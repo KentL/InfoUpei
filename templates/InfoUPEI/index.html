@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+
+{% load staticfiles %}
+
+{% block title_block %}
+Upei Info
+{% endblock %}
+
+{% block error_msg_block %}
+    {% if messages %}
+        <div class="alert alert-warning">
+        <ul>
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        </div>
+{% endif %}
+{% endblock %}
+
+{% block body_block %}
+
+    {% if user.is_authenticated %}
+            <div class="page-header container">
+                <h1 > Welcome to UPEI Info System,{{ user_profile.first_name }}!</h1>
+            </div>
+
+            <li><a href="{% url 'course_menu' %}">All courses</a></li>
+                {% if user_profile.role.name.lower == 'hr' %}
+                    <li><a href="{% url 'register' %}">Register For New User</a></li>
+                {% endif %}
+
+                {% if user_profile.role.name.lower == 'student' %}
+                    <li><a href="{% url 'register_course' %}">Register a course</a> </li>
+                {% endif %}
+
+                {% if user_profile.role.name.lower == 'teacher' %}
+                    <li><a href="{% url 'add_course' %}">Add a course</a></li>
+                {% endif %}
+    {% else %}
+         <div class="row">
+            <div class="jumbotron col-sm-5" id="login_panel">
+                <div class="page-header">
+                     <p>Welcome to UPEI Info System!</p>
+                </div>
+
+                <form id="login_form" method="post" action="{% url 'user_login' %}">
+                        {% csrf_token %}
+                         <div class="form-group">
+                                <p class="required">
+                                    <label for="id_username">Login Name:</label>
+                                    <input class="form-control"  id="student_username_txt" maxlength="30" name="username" type="text"  placeholder="Enter username"/>
+                                </p>
+                            <br />
+                         </div>
+                        <div class="form-group">
+                            <p class="required">
+                                <label for="student_password_txt">Password:</label>
+                                <input class="form-control" id="student_password_txt" name="password" type="password" placeholder="Enter password" />
+                            </p>
+                            <br />
+                        </div>
+                        <input type="submit" value="log in" />
+                </form>
+            </div>
+
+             <div class="col-sm-1">
+
+             </div>
+
+            <div class=" col-sm-6" id="display_panel">
+                <div class="row">
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                      </ol>
+
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active slider_picture">
+                            <div class="image_text">
+                                This is the image description text
+                            </div>
+                          <img src="{% static 'images/HomePageImages/athleticsbuilding.JPG' %}" alt="athleticsbuilding" >
+                        </div>
+
+                        <div class="item slider_picture">
+                            <div class="image_text">
+                                This is the image description text
+                            </div>
+                          <img src="{% static 'images/HomePageImages/footballmatch.jpg' %}" alt="footballmatch" >
+                        </div>
+
+                        <div class="item slider_picture">
+                            <div class="image_text">
+                                This is the image description text
+                            </div>
+                          <img src="{% static 'images/HomePageImages/socketevent.jpg' %}" alt="socketevent">
+                        </div>
+                        <!-- Left and right controls -->
+                      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div id="upcomint_div">
+                        <div id="event_list_header"><h2 >Upcoming Events</h2></div>
+                        <ul id="event_list" class="list-group">
+                            <li class="list-group-item"><div class="event_list_item "><a href="#">Game</a> </div> </li>
+                            <li class="list-group-item"><div class="event_list_item "><a href="#">Oriantation Week</a></div> </li>
+                            <li class="list-group-item"><div class="event_list_item "><a href="#">Soccer Game</a></div> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         </div>
+    {% endif %}
+
+{% endblock %}

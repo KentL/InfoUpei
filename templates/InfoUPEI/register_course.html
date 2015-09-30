@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+{% block title_block %} Register Courses{% endblock %}
+{% block body_block %}
+    {% if course_was_chosen %}
+    <h1> You have already registered for course:{{ chosen_course_name }}. You can't register the same course for twice.</h1>
+    <a href="{% url 'register_course' %}">Register another course</a>
+    <a href="{% url 'index' %}">Or go back to home page</a>
+
+    {% elif not registered %}
+        <h1>Register for a course!</h1>
+        <form id="register_course_form" method="post" action="{% url 'register_course'%}">
+          <h2 class="form-signin-heading">Choose a Course</h2>
+            {% csrf_token %}
+            {{ form|as_bootstrap  }}
+            <br/>
+            <button class="btn btn-primary" type="submit" name="submit">Register</button>
+        </form>
+    {% else %}
+    <h1>Successfully registered!</h1>
+    <a href="{% url 'register_course' %}">Register another course</a>
+    <a href="{% url 'index' %}">Or go back to home page</a>
+    {% endif %}
+{% endblock %}

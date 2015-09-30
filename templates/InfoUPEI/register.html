@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap_toolkit %}
+{% block title_block %}Register New Student{% endblock %}
+{% block body_block %}
+
+    {% if not registered  %}
+    <h1>Register For New Commer!</h1>
+    <form id="student_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form|as_bootstrap}}
+        <br>
+        <button class="btn btn-primary" type="submit" name="submit">Add User</button>
+    </form>
+    {% else %}
+    <h1>Registered Successfully!</h1>
+    <a href="{% url 'register' %}">Register for another </a>
+    {% endif %}
+{% endblock %}

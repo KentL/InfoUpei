@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title_block %}Courses Menu{% endblock %}
+{% block body_block %}
+    {% if role == 'student' %}
+    <h1>My chosen courses</h1>
+    {% elif role == 'teacher' %}
+    <h1>My teaching courses</h1>
+    {% elif role == 'hr' %}
+    <h1>All UPEI courses</h1>
+    {% endif %}
+
+    <ul>
+        {% for course in courses  %}
+            <li><p class="text-info"><a href="{% url 'course_detail' course.name %}">{{ course.name }}</a></p></li>
+        {% endfor %}
+
+    </ul>
+{% endblock %}

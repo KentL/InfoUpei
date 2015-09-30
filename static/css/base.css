@@ -1,0 +1,36 @@
+body {
+    background: url("/static/images/UPEIBackground1.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+
+#main_container {
+    background:rgba(255,255,255,0.8);
+    width:100%;
+}
+
+
+
+footer {
+    background-color:rgba(50,50,50,1.0);
+    color:white;
+    clear:both;
+    text-align:left;
+    padding:20px;
+}
+
+
+.footer_link{
+    color:lightblue;
+}
+
+
+.footer_column{
+     border-right: 1px solid #ccc;
+}
+
+.footer_column_text {
+    padding-left: 10px;
+    padding-right:10px;
+}

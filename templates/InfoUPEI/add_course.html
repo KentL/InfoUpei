@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title_block %} Add Course{% endblock %}
+{% block body_block %}
+   {% load staticfiles %}
+
+    <script src="{% static "js/jquery-1.11.3.js" %}"></script>
+    <script src="{% static "js/add_course.js" %}"></script>
+
+    <h1>Create your new course</h1>
+    <form id="course_form" method="post"action="{% url 'add_course' %}" enctype="multipart/form-data">
+        <div class="form-group">
+            {% csrf_token %}
+            {{ form.name.errors }}<br>
+            {{ form.name.help_text }}<br>
+            {{ form.name }}<br><br><br>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                <input type="radio" name="course_description" value="txt" checked>Copy and paste a course description:<br>
+                {{ form.course_description_text.errors }}<br>
+                {{ form.course_description_text.help_text }}<br>
+                {{ form.course_description_text }}<br>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                 <div class="form-group">
+                    <input type="radio" name="course_description" value="file">Upload a course description file:<br>
+                    {{ form.course_description_file.errors }}<br>
+                    {{ form.course_description_file.help_text }}<br>
+                    {{ form.course_description_file }}<br>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <input type="radio" name="course_description" value="none" >No decription for this course<br>
+            </div>
+        </div>
+        <br>
+    <input type="submit" name="submit" value="Add Course" class="btn btn-primary"/>
+    </form>
+{% endblock %}

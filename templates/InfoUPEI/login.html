@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+{% block title_block %}Login{% endblock %}
+{% block body_block %}
+    <script src="{% static "js/jquery-1.11.3.js" %}"></script>
+    <script src="{% static "js/login.js" %}"></script>
+    {#  Login Form   #}
+    <form id="login_form" method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+         <div class="form-group">
+                <p class="required">
+                    <label for="id_username">Login Name:</label>
+                    <input class="form-control"  id="student_username_txt" maxlength="30" name="username" type="text"  placeholder="Enter username"/>
+                </p>
+            <br />
+         </div>
+        <div class="form-group">
+            <p class="required">
+                <label for="student_password_txt">Password:</label>
+                <input class="form-control" id="student_password_txt" name="password" type="password" placeholder="Enter password" />
+            </p>
+            <br />
+        </div>
+        <input type="submit" value="log in" />
+    </form>
+
+
+{% endblock %}
